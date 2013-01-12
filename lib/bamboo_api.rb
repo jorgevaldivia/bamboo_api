@@ -1,6 +1,9 @@
 require "bamboo_api/version"
 require "bamboo_api/plan"
 require "bamboo_api/project"
+require "bamboo_api/build"
+require "bamboo_api/stage"
+
 require "rest_client"
 require 'open-uri'
 require 'json'

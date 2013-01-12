@@ -1,7 +1,8 @@
 class BambooApi::Plan < BambooApi
 	
 	attr_reader :short_name, :short_key, :type, :enabled, :link, :key, :name,
-		:is_favourite, :is_active, :is_building, :average_build_time, :actions, :stages, :branches
+		:is_favourite, :is_active, :is_building, :average_build_time, :actions, :stages, :branches,
+		:builds_cache
 
 	def initialize short_name, short_key, type, enabled, link, key, name, is_favourite=nil, 
 		is_active=nil, is_building=nil, average_build_time=nil, actions=nil, stages=nil, branches=nil
@@ -22,6 +23,11 @@ class BambooApi::Plan < BambooApi
 		@actions = actions
 		@stages = stages
 		@branches = branches
+	end
+
+	def builds
+		@builds_cache = BambooApi::Build.find_by_plan self.key if @builds_cache.nil?
+		@builds_cache		
 	end
 
 	def self.parse plans
