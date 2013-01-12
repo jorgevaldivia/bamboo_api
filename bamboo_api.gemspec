@@ -2,7 +2,6 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'bamboo_api/version'
-# require 'bamboo_api/plan'
 
 Gem::Specification.new do |gem|
   gem.name          = "bamboo_api"

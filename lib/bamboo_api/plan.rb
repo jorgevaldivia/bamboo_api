@@ -4,7 +4,7 @@ class BambooApi::Plan
 
 	attr_reader :short_name, :short_key, :type, :enabled, :link, :key, :name
 
-	def initalize short_name, short_key, type, enabled, link, key, name
+	def initialize short_name, short_key, type, enabled, link, key, name
 		@short_name = short_name
 		@short_key = short_key
 		@type = type

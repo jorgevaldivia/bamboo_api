@@ -1,5 +1,6 @@
 require "bamboo_api/version"
 require "bamboo_api/plan"
+require "bamboo_api/project"
 require "rest_client"
 require 'open-uri'
 require 'json'
@@ -14,6 +15,10 @@ class BambooApi
 
   def plans
   	BambooApi::Plan.parse( self.request "plan" )
+  end
+
+  def projects
+  	BambooApi::Project.parse( self.request "project" )
   end
 
   protected
