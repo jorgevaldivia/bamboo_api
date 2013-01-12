@@ -8,7 +8,7 @@ class BambooApi::Project
 		@name = name
 	end
 
-	def self.parse project
+	def self.parse projects
 		parsed_projects = []
 
 		projects[ "projects" ][ "project" ].each do | project |
@@ -18,7 +18,15 @@ class BambooApi::Project
 		parsed_projects
 	end
 
-	def self.parse_single projects
+	def self.parse_single project
 		BambooApi::Project.new project[ "link" ], project[ "key" ], project[ "name" ]
+	end
+
+	def self.all
+		BambooApi::Project.parse( BambooApi.request "project" )
+	end
+
+	def self.find key
+		BambooApi::Project.parse_single( BambooApi.request "project/#{key}" )
 	end
 end
