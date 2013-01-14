@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["jorge@valdivia.me"]
   gem.description   = %q{Atlassian Bamboo API Wrapper}
   gem.summary       = %q{A simple wrapper for Atlassian's Bamboo's REST API.}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/jorgevaldivia/bamboo_api"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
