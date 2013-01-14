@@ -1,6 +1,6 @@
 # BambooApi
 
-TODO: Write a gem description
+This gem is a wrapper for Atlassian's Bamboo's REST API. More infomation about the API can be found [here](https://developer.atlassian.com/display/BAMBOODEV/Bamboo+REST+Resources). Using this gem gives you the ability to get information on your Bamboo projects, plans, builds, and stages (for builds only). Of most use is probably the ability to check the build status of a plan.
 
 ## Installation
 
