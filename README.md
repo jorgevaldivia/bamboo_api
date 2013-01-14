@@ -37,11 +37,11 @@ Plans
 
 Builds
 
-	BambooApi::Build.find( "BUILDID" )
-	BambooApi::Build.find_by_plan( "PLANKEY" )
-	BambooApi::Build.find( "BUILDID" ).stages
-	BambooApi::Build.find( "BUILDID" ).status
-	BambooApi::Build.find( "BUILDID" ).failing_stage # Return the failing stage if the status if failing
+		BambooApi::Build.find( "BUILDID" )
+		BambooApi::Build.find_by_plan( "PLANKEY" )
+		BambooApi::Build.find( "BUILDID" ).stages
+		BambooApi::Build.find( "BUILDID" ).status
+		BambooApi::Build.find( "BUILDID" ).failing_stage # Return the failing stage if the status if failing
 
 Note that there is no 'all' method for builds, as the Bamboo API requires a plan key.
 
