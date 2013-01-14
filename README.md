@@ -24,8 +24,8 @@ Initialization
 
 Projects
 
-		puts BambooApi::Project.all
-		puts BambooApi::Project.find( "KEY" )
+		BambooApi::Project.all
+		BambooApi::Project.find( "KEY" )
 
 Plans
 
