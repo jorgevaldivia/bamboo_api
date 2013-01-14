@@ -24,7 +24,6 @@ VCR.configure do |c|
   c.default_cassette_options = { record: :once, serialize_with: :json, preserve_exact_body_bytes: true, decode_compressed_response: true }
   # c.filter_sensitive_data('jorge@example') { 'jorge@softwareallies' }
   # c.filter_sensitive_data('example') { 'mcfina' }
-  # c.filter_sensitive_data('MyApp') { 'Phoenix' }
   # c.filter_sensitive_data('passwordxxx') { 'devpass17' }
   c.hook_into :webmock
 end

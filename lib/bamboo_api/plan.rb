@@ -30,6 +30,41 @@ class BambooApi::Plan < BambooApi
 		@builds_cache		
 	end
 
+	def building?
+		self.is_building
+	end
+
+	def successful?
+		is_successful = false
+
+		if !self.building?
+			is_successful = self.builds.first.successful?# rescue false
+		end
+
+		is_successful
+	end
+
+	def failed?
+		is_failed = false
+
+		if !self.building?
+			is_failed = self.builds.first.failed? rescue false
+		end
+
+		is_failed
+	end
+
+	def readable_status
+		if self.building?
+			"#{self.name} is currently building."
+		elsif self.successful?
+			"#{self.name} is currently open and it is safe to commit."
+		elsif self.failed?
+			last_build = self.builds.first
+			"#{self.name} is currently broken due to failing #{last_build.failing_stage.name} committed by #{ last_build.username }"
+		end
+	end
+
 	def self.parse plans
 		parsed_plans = []
 

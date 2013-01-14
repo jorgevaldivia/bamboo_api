@@ -46,6 +46,26 @@ class BambooApi::Build
 		self.build_reason.scan(/href="(.*)"/).flatten.first if !build_reason.nil? && !build_reason.empty?
 	end
 
+	def successful?
+		self.state == "Successful"
+	end
+
+	def failed?
+		self.state == "Failed"
+	end
+
+	def failing_stage
+		failing = nil
+		self.stages.each do | stage |
+			if stage.failed?
+				failing = stage
+				break
+			end
+		end
+
+		failing
+	end
+
 	def self.parse builds
 		parsed_builds = []
 
@@ -56,10 +76,9 @@ class BambooApi::Build
 		parsed_builds
 	end
 
-
 	def self.parse_single build
-		stages = BambooApi::Stage.parse( build[ "stages" ] )
-		BambooApi::Build.new build[ "restartable" ], build[ "onceOff" ], build[ "continuable" ], build[ "id" ], build[ "lifeCycleState" ],
+		stages = BambooApi::Stage.parse( build )
+		BambooApi::Build.new build[ "restartable" ], build[ "onceOff" ], build[ "continuable" ], build[ "id" ], build[ "number" ], build[ "lifeCycleState" ],
 			build[ "state" ], build[ "key" ], build[ "link" ], build[ "planName" ], build[ "projectName" ], build[ "buildStartedTime" ], 
 			build[ "buildCompletedTime" ], build[ "buildDurationInSeconds" ], build[ "vcsRevisionKey" ], build[ "buildTestSummary" ], 
 			build[ "successfulTestCount" ], build[ "failedTestCount" ], build[ "quarantinedTestCount" ], build[ "buildReason" ], stages
@@ -70,10 +89,10 @@ class BambooApi::Build
 	end
 
 	def self.find key
-		BambooApi::Build.parse_single( BambooApi.request "build/#{key}" )
+		BambooApi::Build.parse_single( BambooApi.request "result/#{key}", "stages" )
 	end
 
-	def find_by_plan plan_key
-		BambooApi::Build.parse( BambooApi.request "result/#{plan_key}" )
+	def self.find_by_plan plan_key
+		BambooApi::Build.parse( BambooApi.request "result/#{plan_key}", "results.result.stages" )
 	end
 end
